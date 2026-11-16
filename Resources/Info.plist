@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>en</string>
+  <key>CFBundleExecutable</key>
+  <string>Holler</string>
+  <key>CFBundleIconFile</key>
+  <string>AppIcon</string>
+  <key>CFBundleIdentifier</key>
+  <string>com.assemblyai.holler</string>
+  <key>CFBundleName</key>
+  <string>Holler</string>
+  <key>CFBundleDisplayName</key>
+  <string>Holler</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>0.1.0</string>
+  <key>CFBundleVersion</key>
+  <string>__BUILD_NUMBER__</string>
+  <key>LSMinimumSystemVersion</key>
+  <string>26.0</string>
+  <key>LSUIElement</key>
+  <true/>
+  <key>NSHighResolutionCapable</key>
+  <true/>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Holler listens while you hold the hotkey, so you can ask about your coding agents.</string>
+  <key>HollerEnvFile</key>
+  <string>__ENV_FILE__</string>
+</dict>
+</plist>

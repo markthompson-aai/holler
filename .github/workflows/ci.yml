@@ -1,0 +1,48 @@
+# Builds every target, runs the test suite, then builds Holler.app as the
+# README says and draws every note state with it, on a macOS 26 runner, which
+# has Xcode 26 and so Swift 6.2. Runs on each push to main, on pull requests
+# and on demand. Blurt and its dependencies are cached between runs to keep each
+# one short.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache SwiftPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: swiftpm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: swiftpm-${{ runner.os }}-
+      - run: swift --version
+      - name: Build every target
+        run: swift build
+      - name: Test
+        # One test at a time: some controller tests time presses on the real clock,
+        # and a busy shared runner can stretch a few milliseconds past their margins.
+        run: scripts/test.sh --no-parallel
+      - name: Test the read tool as the app is built
+        # The app is a release build, and an optimised build once lost every
+        # result of the read tool's task group (Swift 6.3.3) while the debug
+        # suite passed. These tests read through that group.
+        run: scripts/test.sh -c release --filter "aFullReadReturnsTheWholeScrollback|aReadThatCouldNotDeliverIsNotedOnTheTurn"
+      - name: Build Holler.app
+        # The release build of the app and the script that wraps it, neither
+        # of which the steps above touch. Signed ad hoc on a runner.
+        run: scripts/build-app.sh
+      - name: Draw every note state
+        # No windows, permissions or network. The images aren't compared with
+        # the goldens here: whether a runner draws the same pixels as a Mac
+        # with the fonts installed is still open (see CONTRIBUTING.md).
+        run: build/Holler.app/Contents/MacOS/Holler --render-previews "$RUNNER_TEMP/previews"

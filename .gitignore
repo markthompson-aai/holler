@@ -1,0 +1,23 @@
+# Secrets
+.env
+
+# SwiftPM / Xcode
+.build/
+.swiftpm/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local output of --render-previews and --snapshot
+previews/
+
+# Claude Code agent worktrees
+.claude/worktrees/

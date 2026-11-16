@@ -1,0 +1,14 @@
+{
+  "originHash" : "ac145c004658eeed778f826f5f7a00ff1b464df4b18e276054626f3e4ca1f4d2",
+  "pins" : [
+    {
+      "identity" : "blurt",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AssemblyAI/blurt.git",
+      "state" : {
+        "revision" : "479b0bdf0860f82640fb518bb791a193a98f9975"
+      }
+    }
+  ],
+  "version" : 3
+}
